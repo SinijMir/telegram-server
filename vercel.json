@@ -4,7 +4,7 @@
       "api/index.js": {
         "memory": 128,
         "maxDuration": 10,
-        "runtime": "nodejs18.x"
+        "runtime": "nodejs16.x"
       }
     },
     "routes": [
