@@ -1,13 +1,8 @@
 {
-    "version": 2,
-    "functions": {
-        "api/index.js": {
-            "memory": 128,
-            "maxDuration": 10
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/api/index.js"
         }
-    },
-    "routes": [
-        { "src": "/send-order", "methods": ["POST"], "dest": "api/index.js" },
-        { "src": "/send-location", "methods": ["POST"], "dest": "api/index.js" }
     ]
 }
