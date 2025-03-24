@@ -4,6 +4,14 @@ const app = express();
 
 app.use(express.json());
 
+// Отладочный маршрут для проверки переменных окружения
+app.get('/debug', (req, res) => {
+    res.json({
+        botToken: process.env.BOT_TOKEN,
+        chatId: process.env.CHAT_ID
+    });
+});
+
 app.post('/send-order', async (req, res) => {
     const { name, phone, services, comment } = req.body;
     if (!name || !phone || !services) {
