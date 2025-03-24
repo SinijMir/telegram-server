@@ -62,4 +62,36 @@ app.post('/send-location', async (req, res) => {
     }
 });
 
+// Обработка вебхуков от Telegram
+app.post('/webhook', async (req, res) => {
+    const update = req.body;
+
+    // Проверяем, что это сообщение от Telegram
+    if (update && update.message) {
+        const chatId = update.message.chat.id;
+        const text = update.message.text || 'No text provided';
+
+        // Отправляем ответное сообщение
+        const botToken = process.env.BOT_TOKEN;
+        const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+        const message = `Получено сообщение: ${text}`;
+
+        try {
+            await fetch(telegramUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                }),
+            });
+            res.status(200).json({ success: true });
+        } catch (error) {
+            res.status(500).json({ success: false, error: error.message });
+        }
+    } else {
+        res.status(400).json({ success: false, error: 'Invalid update' });
+    }
+});
+
 module.exports = app;
