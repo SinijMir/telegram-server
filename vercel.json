@@ -1,13 +1,13 @@
 {
     "version": 2,
     "functions": {
-        "index.js": {
+        "api/index.js": {
             "memory": 128,
             "maxDuration": 10
         }
     },
     "routes": [
-        { "src": "/send-order", "methods": ["POST"], "dest": "index.js" },
-        { "src": "/send-location", "methods": ["POST"], "dest": "index.js" }
+        { "src": "/send-order", "methods": ["POST"], "dest": "api/index.js" },
+        { "src": "/send-location", "methods": ["POST"], "dest": "api/index.js" }
     ]
 }
